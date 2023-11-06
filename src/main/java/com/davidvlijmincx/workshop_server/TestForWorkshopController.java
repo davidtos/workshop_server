@@ -14,7 +14,7 @@ public class TestForWorkshopController {
 
     @GetMapping("{a}/{b}")
     String randomPage(@PathVariable String a, @PathVariable String b){
-        return generateHtmlPageWithUrls(10);
+        return generateHtmlPageWithUrls(100, "crawl/");
     }
 
     @GetMapping("/delay/{a}/{b}")
@@ -27,11 +27,11 @@ public class TestForWorkshopController {
             throw new RuntimeException(e);
         }
 
-        return generateHtmlPageWithUrls(10);
+        return generateHtmlPageWithUrls(100, "crawl/delay/");
     }
 
 
-    private String generateHtmlPageWithUrls(int numberOfUrls){
+    private String generateHtmlPageWithUrls(int numberOfUrls, String url){
         StringBuilder s = new StringBuilder();
 
         Random r = new Random();
@@ -43,7 +43,7 @@ public class TestForWorkshopController {
             int n = r.nextInt(0,numberOfUrls + 1000);
             int n1 = r.nextInt(0,numberOfUrls + 1000);
 
-            s.append("<a href=\"http://localhost:8080/v1/crawl/").append(n1).append("/").append(n).append("\">i am a random url ").append(i).append(" ").append(n1).append("</a><br/>");
+            s.append("<a href=\"http://localhost:8080/v1/").append(url).append(n1).append("/").append(n).append("\">i am a random url ").append(i).append(" ").append(n1).append("</a><br/>");
         }
 
         s.append("</body>");
